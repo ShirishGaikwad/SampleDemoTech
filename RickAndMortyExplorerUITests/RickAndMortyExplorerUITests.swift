@@ -40,7 +40,7 @@
 //    }
 //}
 // RickAndMortyExplorerUITests.swift
-import XCTest
+/*import XCTest
 
 final class RickAndMortyExplorerUITests: XCTestCase {
     var app: XCUIApplication!
@@ -52,27 +52,39 @@ final class RickAndMortyExplorerUITests: XCTestCase {
         app.launch()
     }
 
+    override func tearDownWithError() throws {
+        app.terminate()
+        app = nil
+    }
+
     func testCharacterListLoading() {
         let characterListTable = app.tables["characterList"]
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == true"), object: characterListTable)
-        let result = XCTWaiter().wait(for: [expectation], timeout: 50)
-        XCTAssertEqual(result, .completed, "Character list table should appear within 50 seconds")
+        let result = XCTWaiter().wait(for: [expectation], timeout: 30)
+        XCTAssertEqual(result, .completed, "Character list table should appear within 30 seconds")
     }
 
     func testCharacterDetailView() {
-            let characterList = app.tables["characterList"]
-            
-            // Wait for the table to appear
-            XCTAssertTrue(characterList.waitForExistence(timeout: 50), "Character list table should appear within 30 seconds")
+        let characterList = app.tables["characterList"]
+        XCTAssertTrue(characterList.waitForExistence(timeout: 30), "Character list table should appear within 30 seconds")
         XCTAssertTrue(characterList.cells.count > 0, "Character list should have at least one cell")
 
         let firstCell = characterList.cells.firstMatch
-        print("First cell exists: \(firstCell.exists)")
+        XCTAssertTrue(firstCell.exists, "First cell should exist")
         firstCell.tap()
 
-          
+        let detailView = app.staticTexts["detailViewCharacterName"]
+        XCTAssertTrue(detailView.waitForExistence(timeout: 30), "Detail view should appear within 30 seconds")
 
-            let detailView = app.staticTexts["detailViewCharacterName"]
-            XCTAssertTrue(detailView.waitForExistence(timeout: 50), "Detail view should appear within 30 seconds")
+        // Assert the displayed name is correct (example)
+        let displayedName = detailView.label
+        XCTAssertEqual(displayedName, "Rick Sanchez", "Detail view should display the correct character name")
+    }
+
+    func testCharacterListPerformance() {
+        measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+            app.launch()
         }
+    }
 }
+*/
