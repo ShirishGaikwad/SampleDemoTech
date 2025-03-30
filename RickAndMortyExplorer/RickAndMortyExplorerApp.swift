@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct RickAndMortyExplorerApp: App {
+struct RickAndMortyExplorer: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
