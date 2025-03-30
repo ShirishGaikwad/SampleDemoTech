@@ -7,32 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var viewModel = ContentViewModel()
+import SwiftUI
 
-    var body: some View {
-        NavigationView {
-            List(viewModel.characters) { character in
-                NavigationLink(destination: DetailView(character: character)) {
-                    HStack {
-                        AsyncImage(url: URL(string: character.image)) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 50, height: 50)
-
-                        Text(character.name)
-                            .font(.headline)
-                    }
-                }
-            }
-            .navigationTitle("Characters")
-            .onAppear {
-                viewModel.fetchCharacters()
-            }
-        }
+struct ContentView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UINavigationController {
+        let navController = UINavigationController(rootViewController: CharactersTableViewController())
+        return navController
     }
+
+    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
 }
 
 #Preview {

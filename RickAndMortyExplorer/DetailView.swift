@@ -20,6 +20,7 @@ struct DetailView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: DetailViewController, context: Context) {}
 }
 
+
 class DetailViewController: UIViewController {
     var character: Character?
 
@@ -50,6 +51,7 @@ class DetailViewController: UIViewController {
         nameLabel.text = character.name
         nameLabel.font = .boldSystemFont(ofSize: 24)
         nameLabel.textAlignment = .center
+        nameLabel.accessibilityIdentifier = "detailViewCharacterName"
 
         view.addSubview(imageView)
         view.addSubview(nameLabel)
